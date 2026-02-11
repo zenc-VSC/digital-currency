@@ -1,10 +1,11 @@
-import { useState } from "react";
+import Layouts from "./Layouts/Layouts";
+import HomePage from "./templates/HomePage.jsx";
 
 function App() {
   return (
-    <>
-      <h1>Digital Currency</h1>
-    </>
+    <Layouts>
+      <HomePage />
+    </Layouts>
   );
 }
 
