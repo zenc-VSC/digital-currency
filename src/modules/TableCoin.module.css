@@ -17,7 +17,7 @@
   text-align: left;
   padding: 10px 0;
 }
-@madia (max-width: 600px) {
+@media (max-width: 600px) {
   .table {
     display: block;
     overflow-x: scroll;

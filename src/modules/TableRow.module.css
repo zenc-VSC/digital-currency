@@ -25,7 +25,7 @@ tr {
 .error{
     color: #d33636;
 }
-@madia (max-width: 600px){
+@media (max-width: 600px){
     .td{
         padding: 0 10px;
     }

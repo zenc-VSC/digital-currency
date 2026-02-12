@@ -24,7 +24,7 @@ function TableRow({
       <td>{name}</td>
       <td>${current_price.toLocaleString()}</td>
       <td className={price_change > 0 ? styles.success : styles.error}>
-        {price_change.toFixed(2)}%
+        {price_change ? price_change.toFixed(2) : "-"}
       </td>
       <td>{total_volume.toLocaleString()}</td>
       <td>
