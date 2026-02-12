@@ -1,17 +1,18 @@
 import React from "react";
 
-import { MutatingDots } from "react-loader-spinner"; 
+import { MutatingDots } from "react-loader-spinner";
+import styles from "./TableCoin.module.css";
 
 import TableRow from "./TableRow.jsx";
 
 function TableCoin({ coins, isLoading }) {
   console.log(coins);
   return (
-    <div>
+    <div className={styles.container}>
       {isLoading ? (
-        <MutatingDots color="#3874ff" secondaryColor="#3874ff"/>
+        <MutatingDots color="#3874ff" secondaryColor="#3874ff" />
       ) : (
-        <table>
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>Coin</th>
