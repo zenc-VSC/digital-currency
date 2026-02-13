@@ -1,6 +1,6 @@
 import React from "react";
 
-import { MutatingDots } from "react-loader-spinner";
+import { RotatingLines } from "react-loader-spinner";
 import styles from "./TableCoin.module.css";
 
 import TableRow from "./TableRow.jsx";
@@ -9,7 +9,7 @@ function TableCoin({ coins, isLoading }) {
   return (
     <div className={styles.container}>
       {isLoading ? (
-        <MutatingDots color="#3874ff" secondaryColor="#3874ff" />
+        <RotatingLines color="#3874fa" strokeWidth="2" />
       ) : (
         <table className={styles.table}>
           <thead>
