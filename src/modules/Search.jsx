@@ -5,13 +5,21 @@ import { searchCoin } from "../services/cryptoApi";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { RotatingLines } from "react-loader-spinner";
+import styles from "./Search.module.css";
+
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
   const [coins, setCoins] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
-    if (!text) return;
+    setCoins([]);
+    if (!text) {
+      setIsLoading(false);
+      return;
+    }
 
     const search = async () => {
       try {
@@ -22,6 +30,7 @@ function Search({ currency, setCurrency }) {
 
         if (json.coins) {
           setCoins(json.coins);
+          setIsLoading(false);
         } else {
           toast.error(json.status.error_message || "Search failed");
         }
@@ -31,13 +40,14 @@ function Search({ currency, setCurrency }) {
         }
       }
     };
+    setIsLoading(true);
     search();
 
     return () => controller.abort();
   }, [text]);
 
   return (
-    <div>
+    <div className={styles.searchBox}>
       <input
         type="text"
         placeholder="Search"
@@ -50,6 +60,25 @@ function Search({ currency, setCurrency }) {
         <option value="jpy">JPY</option>
       </select>
       <ToastContainer position="top-right" autoClose={3000} />
+
+      <div className={styles.searchResult}>
+        {isLoading && (
+          <RotatingLines
+            width="50px"
+            height="50px"
+            color="#3874fa"
+            strokeWidth="2"
+          />
+        )}
+        <ul>
+          {coins.map((coin) => (
+            <li key={coin.id}>
+              <img src={coin.thumb} alt={coin.name} />
+              <p>{coin.name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }
