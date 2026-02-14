@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 
 import { searchCoin } from "../services/cryptoApi";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 function Search({ currency, setCurrency }) {
   const [text, setText] = useState("");
   const [coins, setCoins] = useState([]);
@@ -16,16 +19,15 @@ function Search({ currency, setCurrency }) {
           signal: controller.signal,
         });
         const json = await res.json();
-        console.log(json);
 
         if (json.coins) {
           setCoins(json.coins);
         } else {
-          alert(json.status.error_massage);
+          toast.error(json.status.error_message || "Search failed");
         }
       } catch (error) {
         if (error.name !== "AbortError") {
-          alert(error.massage);
+          toast.error(`Error: ${error.message}`);
         }
       }
     };
@@ -47,6 +49,7 @@ function Search({ currency, setCurrency }) {
         <option value="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 }
