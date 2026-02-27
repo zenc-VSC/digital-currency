@@ -13,19 +13,26 @@ function TableRow({
     total_volume,
   },
   currency,
+  setChart,
 }) {
   const currentSymbol = { usd: "$", eur: "€", jpy: "¥" };
+  const showHandler = () => {
+    setChart(true);
+  };
 
   return (
     <tr>
       <td>
-        <div className={styles.symbol}>
+        <div className={styles.symbol} onClick={showHandler}>
           <img src={image} alt="coinImage" />
           {symbol.toUpperCase()}
         </div>
       </td>
       <td>{name}</td>
-      <td>{currentSymbol[currency]}{current_price.toLocaleString()}</td>
+      <td>
+        {currentSymbol[currency]}
+        {current_price.toLocaleString()}
+      </td>
       <td className={price_change > 0 ? styles.success : styles.error}>
         {price_change ? price_change.toFixed(2) : "-"}
       </td>
