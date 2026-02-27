@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { searchCoin } from "../services/cryptoApi";
 
 import { toast, ToastContainer } from "react-toastify";
+
 import "react-toastify/dist/ReactToastify.css";
 
 import { RotatingLines } from "react-loader-spinner";
@@ -60,25 +61,26 @@ function Search({ currency, setCurrency }) {
         <option value="jpy">JPY</option>
       </select>
       <ToastContainer position="top-right" autoClose={3000} />
-
-      <div className={styles.searchResult}>
-        {isLoading && (
-          <RotatingLines
-            width="50px"
-            height="50px"
-            color="#3874fa"
-            strokeWidth="2"
-          />
-        )}
-        <ul>
-          {coins.map((coin) => (
-            <li key={coin.id}>
-              <img src={coin.thumb} alt={coin.name} />
-              <p>{coin.name}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {(!!coins.length || isLoading) && (
+        <div className={styles.searchResult}>
+          {isLoading && (
+            <RotatingLines
+              width="50px"
+              height="50px"
+              color="#3874fa"
+              strokeWidth="2"
+            />
+          )}
+          <ul>
+            {coins.map((coin) => (
+              <li key={coin.id}>
+                <img src={coin.thumb} alt={coin.name} />
+                <p>{coin.name}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
